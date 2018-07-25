@@ -1,0 +1,90 @@
+package model;
+
+import java.util.Map;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Car {
+
+	private String make;
+	private String model;
+	private String vin;
+	private String Color;
+	private String Notes;
+	private Perdayrent perdayrent;
+	private Metrics metrics;
+	
+	
+	public Car() {
+		
+	}
+	public Car(String make, String model, String vin, Metadata metadata, Perdayrent perdayrent, Metrics metrics) {
+		super();
+		this.make = make;
+		this.model = model;
+		this.vin = vin;
+		this.perdayrent = perdayrent;
+		this.metrics = metrics;
+	}
+	public String getMake() {
+		return make;
+	}
+	public void setMake(String make) {
+		this.make = make;
+	}
+	public String getModel() {
+		return model;
+	}
+	public void setModel(String model) {
+		this.model = model;
+	}
+	public String getVin() {
+		return vin;
+	}
+	public void setVin(String vin) {
+		this.vin = vin;
+	}
+	
+	public String getColor() {
+		return Color;
+	}
+	public void setColor(String color) {
+		Color = color;
+	}
+	public String getNotes() {
+		return Notes;
+	}
+	public void setNotes(String notes) {
+		Notes = notes;
+	}
+	public Perdayrent getPerdayrent() {
+		return perdayrent;
+	}
+	public void setPerdayrent(Perdayrent perdayrent) {
+		this.perdayrent = perdayrent;
+	}
+	public Metrics getMetrics() {
+		return metrics;
+	}
+	public void setMetrics(Metrics metrics) {
+		this.metrics = metrics;
+	}
+	@Override
+	public String toString() {
+		return "Car [make=" + make + ", model=" + model + ", vin=" + vin + ", Color=" + Color + ", Notes=" + Notes
+				+ ", perdayrent=" + perdayrent + ", metrics=" + metrics + "]";
+	}
+	
+	@SuppressWarnings("unchecked")
+    @JsonProperty("metadata")
+    private void unpackNested(Map<String,Object> metadata) {
+        this.Color = (String)metadata.get("Color");
+       this.Notes=(String)metadata.get("Notes");
+    }
+	
+	
+	
+	
+}

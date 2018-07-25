@@ -1,0 +1,41 @@
+package service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+import model.Car;
+import java.util.Arrays;
+import java.util.List;
+
+
+@Service
+public class CarRestService {
+	
+
+	    //define a RestTemplate object
+	    private final RestTemplate restTemplate;
+
+	
+	    //define an argument constructor, pass in the RestTemplate object
+	    //and Autowire it
+	    @Autowired
+	    public CarRestService(RestTemplate restTemplate){
+	        this.restTemplate = restTemplate;
+	    }
+	     /**
+	     * Get all cars
+	     * @return a list
+	     */
+	    public List<Car> getCars(){
+	    	
+	    	ResponseEntity<Car[]> response = restTemplate.getForEntity("", Car[].class);
+	    	return Arrays.asList(response.getBody());	
+	    	
+	    	
+	    	
+	    }
+
+	
+	
+}

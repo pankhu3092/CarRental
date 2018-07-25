@@ -1,0 +1,77 @@
+package service;
+
+import org.springframework.stereotype.Service;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import model.Car;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+
+@Service
+public class CarRestService {
+	
+
+	    public List<Car> getCars() {
+	    	
+	    	//using object Mapper to read json and store in car list
+	    	ObjectMapper objectMapper = new ObjectMapper();
+	        List<Car> cars = null;
+			try {
+				cars = objectMapper.readValue(new File("src/main/resources/car.json"),new TypeReference<List<Car>>(){});
+			} catch (JsonParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (JsonMappingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return cars;
+	    	
+	    }
+
+	
+	    //Question 1: Print all the blue Teslas received in the web service response. Also print the notes
+	    public void selectBlueTesla() throws IOException{
+	    	
+	    	List<Car> cars=getCars();
+	    	if(cars.size()!=0) {
+	    	for(Car c:cars) {
+	    		
+	    		if(c.getMake().equals("Tesla") && c.getColor().equals("Blue")) {
+	    			System.out.println("Car- "+c.getMake()+" Model- "+c.getModel()+" Vin- "+c.getVin()+" Notes- "+c.getNotes());
+    		}
+
+	    	}
+	    	}
+	    }
+	    
+//	  //   Question 2: Return all cars which have the lowest per day rental cost for both cases:
+//		a. Price only
+//		b. Price after discounts
+	    public void selectLowRentalCar() throws IOException{
+	    	
+	    	List<Car> cars=getCars();
+	    	Map<Integer, List<Car>> map= new HashMap<Integer, List<Car>>();
+	    	float lowestPrice=cars.get(0).getPrice();
+	    	if(cars.size()!=0) {
+	    	for(int i=1;i<cars.size();i++) {
+	    		if(cars.get(i).getPrice()<lowestPrice) {
+	    			
+    		    }
+	    	}
+	    	}
+	    }
+	
+}

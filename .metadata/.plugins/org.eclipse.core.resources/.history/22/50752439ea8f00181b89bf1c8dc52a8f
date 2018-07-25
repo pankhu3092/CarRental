@@ -1,0 +1,35 @@
+package model;
+
+public class Perdayrent {
+  
+	private float Price;
+	private float Discount;
+	
+	public Perdayrent() {
+	
+	}
+	
+	public Perdayrent(float price, float discount) {
+		Price = price;
+		Discount = discount;
+	}
+	public float getPrice() {
+		return Price;
+	}
+	public void setPrice(float price) {
+		Price = price;
+	}
+	public float getDiscount() {
+		return Discount;
+	}
+	public void setDiscount(float discount) {
+		Discount = discount;
+	}
+
+	@Override
+	public String toString() {
+		return "Perdayrent [Price=" + Price + ", Discount=" + Discount + "]";
+	}
+	
+	
+}

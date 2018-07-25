@@ -1,0 +1,23 @@
+package model;
+
+public class Metrics {
+
+	
+	private float yoymaintenancecost;
+	private float depreciation;
+	private RentalCount rentalcount;
+	
+	public Metrics() {
+	
+	}
+	
+	public Metrics(float yoymaintenancecost, float depreciation, RentalCount rentalcount) {
+		this.yoymaintenancecost = yoymaintenancecost;
+		this.depreciation = depreciation;
+		this.rentalcount = rentalcount;
+	}
+	
+	
+	
+	
+}

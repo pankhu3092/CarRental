@@ -1,0 +1,66 @@
+[  {
+     "make": "Audi",
+	 "model": "A7",
+     "vin": "09AGHY64352JITEG98K",
+     "metadata" : {
+         "Color" : "Black",
+         "Notes" : "Scratches on the front side of the car"
+         },
+     "perdayrent" : {
+        "Price" : 130,
+         "Discount" : 15
+         },
+     "metrics" : {
+         "yoymaintenancecost" : 2190.76,
+         "depreciation": 2256.43,
+         "rentalcount" : {
+             "lastweek" : 4,
+             "yeartodate" : 453
+             }
+         }
+    },
+    
+    {
+     "make": "Tesla",
+	 "model": "T7",
+     "vin": "09AY64352JITEG98K",
+     "metadata" : {
+         "Color" : "Blue",
+         "Notes" : "Scratches on the back"
+         },
+     "perdayrent" : {
+        "Price" : 300,
+         "Discount" : 20
+         },
+     "metrics" : {
+         "yoymaintenancecost" : 2190.76,
+         "depreciation": 2256.43,
+         "rentalcount" : {
+             "lastweek" : 4,
+             "yeartodate" : 223
+             }
+         }
+    },
+    
+    {
+     "make": "BMW",
+	 "model": "T7",
+     "vin": "09AY64352JITEG98K",
+     "metadata" : {
+         "Color" : "Blue",
+         "Notes" : "Scratches on the back"
+         },
+     "perdayrent" : {
+        "Price" : 200,
+         "Discount" : 10
+         },
+     "metrics" : {
+         "yoymaintenancecost" : 2190.76,
+         "depreciation": 2256.43,
+         "rentalcount" : {
+             "lastweek" : 4,
+             "yeartodate" : 10
+             }
+         }
+    }
+]

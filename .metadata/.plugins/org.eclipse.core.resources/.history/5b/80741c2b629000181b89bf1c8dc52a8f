@@ -1,0 +1,28 @@
+package com.service;
+
+
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.beans.HasPropertyWithValue.hasProperty;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+public class CarRestServiceTest {
+	
+	@Autowired
+	private CarRestService crs;
+	
+	@Test
+    public void testAssertList() {
+		assertThat( crs.selectBlueTesla(), contains(
+			    hasProperty("make", is("Tesla")), 
+			    hasProperty("name", is("bar"))
+			));
+	}
+
+}

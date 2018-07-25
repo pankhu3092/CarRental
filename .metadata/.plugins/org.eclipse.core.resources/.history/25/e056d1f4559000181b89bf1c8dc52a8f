@@ -1,0 +1,121 @@
+package service;
+
+import org.springframework.stereotype.Service;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import model.Car;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
+
+@Service
+public class CarRestService {
+	
+
+	    public List<Car> getCars() {
+	    	
+	    	//using object Mapper to read json and store in car list
+	    	ObjectMapper objectMapper = new ObjectMapper();
+	        List<Car> cars = null;
+			try {
+				cars = objectMapper.readValue(new File("src/main/resources/car.json"),new TypeReference<List<Car>>(){});
+			} catch (JsonParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (JsonMappingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return cars;
+	    	
+	    }
+
+	
+	    //Question 1: Print all the blue Teslas received in the web service response. Also print the notes
+	    public void selectBlueTesla() throws IOException{
+	    	
+	    	List<Car> cars=getCars();
+	    	if(cars.size()!=0) {
+	    	for(Car c:cars) {
+	    		
+	    		if(c.getMake().equals("Tesla") && c.getColor().equals("Blue")) {
+	    			System.out.println("Car- "+c.getMake()+" Model- "+c.getModel()+" Color- "+c.getColor()+" Notes- "+c.getNotes());
+    		}
+
+	    	}
+	    	}
+	    }
+	    
+//	  //   Question 2: Return all cars which have the lowest per day rental cost for both cases:
+//		a. Price only
+//		b. Price after discounts
+	    public void selectLowRentalCar() throws IOException{
+	    	
+	    	List<Car> cars=getCars();
+	
+	    	TreeMap<Float, List<Car>> map= new TreeMap<Float, List<Car>>();
+	    	TreeMap<Float, List<Car>> mapD= new TreeMap<Float, List<Car>>();
+	    	
+	    	if(cars.size()!=0) {
+	    	for(Car c:cars) {
+	    		
+	    		//without discount
+	    		if(map.get(c.getPrice())!=null) {
+	    			List<Car> samValueCar=map.get(c.getPrice());
+	    			samValueCar.add(c);
+	    			map.put(c.getPrice(),samValueCar);
+	    			
+	    		}
+	    		else {
+	    			List<Car> samValueCar=new ArrayList<Car>();
+	    			samValueCar.add(c);
+	    		map.put(c.getPrice(), samValueCar);
+	    		}
+	    		
+	    		//with discount
+	    		float discountPrice=(100-c.getDiscount())*c.getPrice()/100;
+	    		
+	    		if(mapD.get(discountPrice)!=null) {
+	    			List<Car> samValueCar=mapD.get(c.getPrice());
+	    			samValueCar.add(c);
+	    			mapD.put(c.getPrice(),samValueCar);
+	    			
+	    		}
+	    		else {
+	    			List<Car> samValueCar=new ArrayList<Car>();
+	    			samValueCar.add(c);
+	    		   mapD.put(discountPrice, samValueCar);
+	    		}
+	    		
+	    	}
+	    	
+	    	//Cars with the lowest Price
+	    	List<Car> lowestRentalPrice=map.firstEntry().getValue();
+	    	for(Car r:lowestRentalPrice) {
+	    		System.out.println("Cars with the lowest Price  "+r.toString());
+	    	}
+	    	
+	    	//Cars with the lowest Price after Discount
+	    	List<Car> lowestRentalPriceDiscount=mapD.firstEntry().getValue();
+	    	for(Car r:lowestRentalPriceDiscount) {
+	    		System.out.println("Cars with the lowest Price after discount  "+r.toString());
+	    	}
+	    	}
+
+	    	
+	    }
+	
+}
